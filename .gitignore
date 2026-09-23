@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Logs & temporary runtime files
+*.log
+.agent-ledger/
+temp/
+scratch/
+.tmp/
+
+# OS and Editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

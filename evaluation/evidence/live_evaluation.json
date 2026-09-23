@@ -1,0 +1,48 @@
+{
+  "benchmark_version": "1.0.0",
+  "gateway": "Claude: EvoLink (/chat/completions) | GPT: OpenAI (/responses)",
+  "timestamp": "2026-09-23T19:02:29.749Z",
+  "overall_status": "FAIL",
+  "total_targets": 2,
+  "targets_exercised": 2,
+  "targets_passed": 0,
+  "results": [
+    {
+      "label": "LIVE CLAUDE OPUS 5",
+      "provider": "anthropic",
+      "model_id": "claude-opus-5",
+      "task_id": "agent-ledger-specification",
+      "attempt": 1,
+      "status": "PROVIDER_ERROR",
+      "error_category": "PROVIDER_ERROR",
+      "latency": 55458,
+      "latency_ms": 55458,
+      "prompt_hash": "f17f42d54058ceb6c4f58f06d9bf04eb5e0637e4e452024b8234775eb179cf3c",
+      "response_hash": null,
+      "api": "EvoLink /chat/completions",
+      "exercised": true,
+      "classification": "PROVIDER_ERROR",
+      "details": "EvoLink response returned empty or whitespace-only model content",
+      "ledger_verified": true
+    },
+    {
+      "label": "LIVE GPT-5.6-SOL",
+      "provider": "openai",
+      "model_id": "gpt-5.6-sol",
+      "task_id": "agent-ledger-specification",
+      "attempt": 1,
+      "status": "PROVIDER_ERROR",
+      "error_category": "PROVIDER_ERROR",
+      "latency": 6087,
+      "latency_ms": 6087,
+      "prompt_hash": "f17f42d54058ceb6c4f58f06d9bf04eb5e0637e4e452024b8234775eb179cf3c",
+      "response_hash": null,
+      "api": "OpenAI /responses",
+      "exercised": true,
+      "classification": "PROVIDER_ERROR",
+      "details": "Provider returned HTTP 429: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.",
+      "ledger_verified": true
+    }
+  ],
+  "evidence_digest": "8fd987f88d3bb2fba47efb0640604b003972416829fab15b664ee3de06c5fb62"
+}

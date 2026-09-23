@@ -1,0 +1,260 @@
+{
+  "benchmark_version": "1.0.0",
+  "timestamp": "2026-09-23T19:00:47.624Z",
+  "git_commit_sha": "reference-stage-8-baseline",
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "node_version": "v24.17.0"
+  },
+  "reference_evaluation": {
+    "status": "PASS",
+    "total_checks": 6,
+    "passed_checks": 6,
+    "checks": [
+      {
+        "checkId": "CHECK-SCHEMA-001",
+        "passed": true,
+        "details": "All schema, uniqueness, sequence, and causal checks passed successfully"
+      },
+      {
+        "checkId": "CHECK-CRASH-001",
+        "passed": true,
+        "details": "Torn-tail recovery and exit 7 historical corruption handling verified"
+      },
+      {
+        "checkId": "CHECK-REPLAY-001",
+        "passed": true,
+        "details": "Tool results virtualized cleanly without side-effects, deterministic output verified"
+      },
+      {
+        "checkId": "CHECK-DRIFT-001",
+        "passed": true,
+        "details": "Cryptographic hash-chain tamper detection verified with exit 5 and exit 7 on recover"
+      },
+      {
+        "checkId": "CHECK-BRANCH-001",
+        "passed": true,
+        "details": "Branch isolation, parent history immutability, and export topology verified"
+      },
+      {
+        "checkId": "CHECK-LOCK-001",
+        "passed": true,
+        "details": "Genuine OS-level advisory locking, contention exit 3, and release verified"
+      }
+    ]
+  },
+  "mutant_evaluation": {
+    "total_mutants": 6,
+    "killed_mutants": 6,
+    "all_mutants_killed": true,
+    "mutants": [
+      {
+        "mutant_id": "MUTANT-CAUSAL-ORDER",
+        "targeted_check": "CHECK-SCHEMA-001",
+        "description": "Associates tool results by array position (FIFO) instead of tool_request_id",
+        "status": "KILLED",
+        "killed_by_target": true,
+        "failure_details": "Expected exit 2 for duplicate active tool_request_id, got 0",
+        "all_checks": [
+          {
+            "checkId": "CHECK-SCHEMA-001",
+            "passed": false
+          },
+          {
+            "checkId": "CHECK-CRASH-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-REPLAY-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-DRIFT-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-BRANCH-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-LOCK-001",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "mutant_id": "MUTANT-TAIL-CRASH",
+        "targeted_check": "CHECK-CRASH-001",
+        "description": "Parses entire log at once and crashes on torn final record without descriptor truncation",
+        "status": "KILLED",
+        "killed_by_target": true,
+        "failure_details": "recover failed with status 2: Crash: Failed to parse log record at line 3: Expected double-quoted property name in JSON at position 30 (line 1 column 31)\n",
+        "all_checks": [
+          {
+            "checkId": "CHECK-SCHEMA-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-CRASH-001",
+            "passed": false
+          },
+          {
+            "checkId": "CHECK-REPLAY-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-DRIFT-001",
+            "passed": false
+          },
+          {
+            "checkId": "CHECK-BRANCH-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-LOCK-001",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "mutant_id": "MUTANT-LIVE-REPLAY",
+        "targeted_check": "CHECK-REPLAY-001",
+        "description": "Executes real tool subprocesses during replay instead of virtualizing recorded results",
+        "status": "KILLED",
+        "killed_by_target": true,
+        "failure_details": "Side-effect detected: canary file was created! Replay executed real tool subprocess instead of virtualizing results",
+        "all_checks": [
+          {
+            "checkId": "CHECK-SCHEMA-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-CRASH-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-REPLAY-001",
+            "passed": false
+          },
+          {
+            "checkId": "CHECK-DRIFT-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-BRANCH-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-LOCK-001",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "mutant_id": "MUTANT-DRIFT-BLIND",
+        "targeted_check": "CHECK-DRIFT-001",
+        "description": "Bypasses historical SHA-256 chain verification on status and export read paths",
+        "status": "KILLED",
+        "killed_by_target": true,
+        "failure_details": "Expected exit 5 for status --json on tampered ledger, got 0",
+        "all_checks": [
+          {
+            "checkId": "CHECK-SCHEMA-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-CRASH-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-REPLAY-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-DRIFT-001",
+            "passed": false
+          },
+          {
+            "checkId": "CHECK-BRANCH-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-LOCK-001",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "mutant_id": "MUTANT-BRANCH-OVERWRITE",
+        "targeted_check": "CHECK-BRANCH-001",
+        "description": "Overwrites or truncates parent branch events upon branch creation",
+        "status": "KILLED",
+        "killed_by_target": true,
+        "failure_details": "Parent history was modified or overwritten after child branch activity",
+        "all_checks": [
+          {
+            "checkId": "CHECK-SCHEMA-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-CRASH-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-REPLAY-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-DRIFT-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-BRANCH-001",
+            "passed": false
+          },
+          {
+            "checkId": "CHECK-LOCK-001",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "mutant_id": "MUTANT-LOCK-OMISSION",
+        "targeted_check": "CHECK-LOCK-001",
+        "description": "Omits OS-level POSIX flock advisory locking, allowing concurrent mutating operations",
+        "status": "KILLED",
+        "killed_by_target": true,
+        "failure_details": "Expected exit 3 on POSIX lock contention, got 0. (Stdout: Appended event 'e1' (seq: 1, type: run_started)\n, Stderr: )",
+        "all_checks": [
+          {
+            "checkId": "CHECK-SCHEMA-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-CRASH-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-REPLAY-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-DRIFT-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-BRANCH-001",
+            "passed": true
+          },
+          {
+            "checkId": "CHECK-LOCK-001",
+            "passed": false
+          }
+        ]
+      }
+    ]
+  },
+  "overall_result": "PASS",
+  "evidence_digest": "08204254401bf410d4d0856dc6da800b403ff7f2b43ee0f14bc804bdf0b2f79d"
+}
