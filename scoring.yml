@@ -1,0 +1,21 @@
+version: "1.0"
+description: "agent-ledger benchmark weighted scoring configuration"
+checks:
+  - id: "CHECK-SCHEMA-001"
+    name: "Schema & Causal Ordering"
+    weight: 0.20
+  - id: "CHECK-CRASH-001"
+    name: "Torn-Write Crash Recovery"
+    weight: 0.15
+  - id: "CHECK-REPLAY-001"
+    name: "Deterministic Replay & Virtualization"
+    weight: 0.20
+  - id: "CHECK-DRIFT-001"
+    name: "Cryptographic Drift & Tamper Detection"
+    weight: 0.15
+  - id: "CHECK-BRANCH-001"
+    name: "Speculative Branch DAG Isolation"
+    weight: 0.15
+  - id: "CHECK-LOCK-001"
+    name: "POSIX Advisory Locking"
+    weight: 0.15

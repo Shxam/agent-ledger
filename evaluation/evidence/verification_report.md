@@ -1,8 +1,8 @@
 # Benchmark Verification Evidence Report
 
-**Generated**: 2026-09-23T19:00:47.624Z
+**Generated**: 2026-09-23T19:25:46.417Z
 **Platform**: win32 (x64), Node.js v24.17.0
-**Evidence SHA-256 Digest**: `08204254401bf410d4d0856dc6da800b403ff7f2b43ee0f14bc804bdf0b2f79d`
+**Evidence SHA-256 Digest**: `b6d18cf44735f84c13016cf92a1f27dd0ea2b0b94b33b8631c122d20a1640c9b`
 
 ## 1. Reference Implementation Verification
 **Result**: **PASS** (6/6 checks passed)

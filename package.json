@@ -12,7 +12,12 @@
     "build": "node -e \"import('node:fs').then(fs => { try { fs.chmodSync('bin/agent-ledger', 0o755); } catch {} console.log('Build completed.'); })\"",
     "verify": "node evaluation/verifier/index.js",
     "evaluate": "node evaluation/harness.js",
-    "evaluate:live": "node evaluation/live_harness.js"
+    "evaluate:live": "node evaluation/live_harness.js",
+    "check:reference": "node evaluation/gates/check_reference.js",
+    "check:mutants": "node evaluation/gates/check_mutants.js",
+    "check:determinism": "node evaluation/gates/check_determinism.js",
+    "check:privacy": "node evaluation/gates/check_privacy.js",
+    "check:acceptance": "node evaluation/gates/check_acceptance.js"
   },
   "keywords": [
     "agent",

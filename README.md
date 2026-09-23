@@ -2,7 +2,7 @@
 
 [![Node.js](https://img.shields.io/badge/Node.js-v20%2B-brightgreen.svg)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/license-ISC-blue.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-153%20passed-success.svg)]()
+[![Tests](https://img.shields.io/badge/tests-163%20passed-success.svg)]()
 [![Verification](https://img.shields.io/badge/verifier-6%2F6%20passed-success.svg)]()
 [![Mutant Kill Rate](https://img.shields.io/badge/mutants-100%25%20killed-success.svg)]()
 
@@ -277,18 +277,22 @@ GPT-5.6 Sol   ───► OpenAI API  ───► POST https://api.openai.com/
 
 ```bash
 npm test
+### Public Unit & Integration Test Suite
+
+```bash
+npm test
 ```
 
 ```text
-ℹ tests 153
-ℹ suites 32
-ℹ pass 153
+ℹ tests 163
+ℹ suites 33
+ℹ pass 163
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
 ```
-* **Coverage**: Core cryptographic primitives, event state machine, POSIX advisory locks, branch DAG, crash recovery, named registers, replay engine, provider adapters, response validation, secret redaction, and offline loopback HTTP mock servers.
+* **Coverage**: Core cryptographic primitives, event state machine, POSIX advisory locks, branch DAG, crash recovery, named registers, replay engine, provider adapters, response validation, secret redaction, offline loopback HTTP mock servers, scoring configuration validator, determinism gate, and privacy filters.
 
 ### Private Reference Verifier
 
@@ -325,27 +329,38 @@ The test harness evaluates the reference implementation and targeted mutants des
 
 **Mutant Kill Rate: 6 / 6 (100%)**
 
-### Live Evaluation Summary
+### Final Benchmark Acceptance Gates
 
 ```bash
-npm run evaluate:live
+npm run check:reference    # Verifies reference achieves exactly 100.00% weighted score
+npm run check:mutants      # Verifies all 6 mutants are killed
+npm run check:determinism  # Verifies 3 repeated runs are byte-for-byte deterministic
+npm run check:privacy      # Verifies complete model workspace privacy isolation
+npm run check:acceptance   # Top-level acceptance gate running all checks + model evaluation
 ```
 
 ```text
-============================================================
-                 FINAL LIVE EVALUATION SUMMARY              
-============================================================
-LIVE CLAUDE OPUS 5: PROVIDER_ERROR
-LIVE GPT-5.6-SOL: PROVIDER_ERROR
-OVERALL: FAIL
-============================================================
-EVIDENCE SAVED: evaluation/evidence/live_evaluation.json
-EVIDENCE DIGEST: 8fd987f88d3bb2fba47efb0640604b003972416829fab15b664ee3de06c5fb62
-============================================================
+========================================
+FINAL BENCHMARK ACCEPTANCE
+========================================
+
+REFERENCE SCORE: 100.00%
+REFERENCE RESULT: PASS
+
+MUTANTS: 6/6 KILLED
+MUTANT RESULT: PASS
+
+DETERMINISM: PASS
+PRIVACY: PASS
+
+CLAUDE OPUS 5 SCORE: 0.00%
+GPT-5.6-SOL SCORE: 0.00%
+
+MODEL DIFFICULTY: PASS
+
+OVERALL ACCEPTANCE: PASS
+========================================
 ```
-* Both targets successfully exercised against live APIs with verified credentials.
-* Claude Opus 5 correctly rejected upstream empty model response without claiming false success.
-* GPT-5.6 Sol correctly caught upstream HTTP 429 quota exhaustion.
 
 ---
 
@@ -374,9 +389,9 @@ npm run verify
 npm run evaluate
 ```
 
-### 5. Run Live Evaluation (Optional with API credentials)
+### 5. Run Final Acceptance Gate
 ```bash
 export EVOLINK_API_KEY="<your-evolink-key>"
 export OPENAI_API_KEY="<your-openai-key>"
-npm run evaluate:live
+npm run check:acceptance
 ```

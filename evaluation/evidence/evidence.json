@@ -1,6 +1,6 @@
 {
   "benchmark_version": "1.0.0",
-  "timestamp": "2026-09-23T19:00:47.624Z",
+  "timestamp": "2026-09-23T19:25:46.417Z",
   "git_commit_sha": "reference-stage-8-baseline",
   "environment": {
     "platform": "win32",
@@ -256,5 +256,5 @@
     ]
   },
   "overall_result": "PASS",
-  "evidence_digest": "08204254401bf410d4d0856dc6da800b403ff7f2b43ee0f14bc804bdf0b2f79d"
+  "evidence_digest": "b6d18cf44735f84c13016cf92a1f27dd0ea2b0b94b33b8631c122d20a1640c9b"
 }

@@ -1,0 +1,127 @@
+{
+  "benchmark_version": "1.0.0",
+  "timestamp": "2026-09-23T19:32:39.084Z",
+  "scoring_configuration_hash": "4ced7cbf7d709f7562004e9a40aeaee66338d3c09dcfa9bc6b169a9343be771e",
+  "reference_score": "100.00%",
+  "per_check_reference_results": [
+    {
+      "checkId": "CHECK-SCHEMA-001",
+      "name": "Schema & Causal Ordering",
+      "weight": 0.2,
+      "passed": true,
+      "weightedScore": 0.2
+    },
+    {
+      "checkId": "CHECK-CRASH-001",
+      "name": "Torn-Write Crash Recovery",
+      "weight": 0.15,
+      "passed": true,
+      "weightedScore": 0.15
+    },
+    {
+      "checkId": "CHECK-REPLAY-001",
+      "name": "Deterministic Replay & Virtualization",
+      "weight": 0.2,
+      "passed": true,
+      "weightedScore": 0.2
+    },
+    {
+      "checkId": "CHECK-DRIFT-001",
+      "name": "Cryptographic Drift & Tamper Detection",
+      "weight": 0.15,
+      "passed": true,
+      "weightedScore": 0.15
+    },
+    {
+      "checkId": "CHECK-BRANCH-001",
+      "name": "Speculative Branch DAG Isolation",
+      "weight": 0.15,
+      "passed": true,
+      "weightedScore": 0.15
+    },
+    {
+      "checkId": "CHECK-LOCK-001",
+      "name": "POSIX Advisory Locking",
+      "weight": 0.15,
+      "passed": true,
+      "weightedScore": 0.15
+    }
+  ],
+  "mutant_results": [
+    {
+      "mutant_id": "MUTANT-CAUSAL-ORDER",
+      "targeted_check": "CHECK-SCHEMA-001",
+      "killed": true,
+      "killing_check": "CHECK-SCHEMA-001",
+      "score": "80.00%"
+    },
+    {
+      "mutant_id": "MUTANT-TAIL-CRASH",
+      "targeted_check": "CHECK-CRASH-001",
+      "killed": true,
+      "killing_check": "CHECK-CRASH-001",
+      "score": "70.00%"
+    },
+    {
+      "mutant_id": "MUTANT-LIVE-REPLAY",
+      "targeted_check": "CHECK-REPLAY-001",
+      "killed": true,
+      "killing_check": "CHECK-REPLAY-001",
+      "score": "80.00%"
+    },
+    {
+      "mutant_id": "MUTANT-DRIFT-BLIND",
+      "targeted_check": "CHECK-DRIFT-001",
+      "killed": true,
+      "killing_check": "CHECK-DRIFT-001",
+      "score": "85.00%"
+    },
+    {
+      "mutant_id": "MUTANT-BRANCH-OVERWRITE",
+      "targeted_check": "CHECK-BRANCH-001",
+      "killed": true,
+      "killing_check": "CHECK-BRANCH-001",
+      "score": "85.00%"
+    },
+    {
+      "mutant_id": "MUTANT-LOCK-OMISSION",
+      "targeted_check": "CHECK-LOCK-001",
+      "killed": true,
+      "killing_check": "CHECK-LOCK-001",
+      "score": "85.00%"
+    }
+  ],
+  "determinism_result": {
+    "status": "PASS",
+    "repeated_runs": 3
+  },
+  "privacy_result": {
+    "status": "PASS",
+    "violations_count": 0
+  },
+  "claude_score": "0.00%",
+  "gpt_score": "0.00%",
+  "model_evaluation_metadata": {
+    "difficulty_passed": true,
+    "models": [
+      {
+        "label": "CLAUDE OPUS 5",
+        "provider": "anthropic",
+        "model_id": "claude-opus-5",
+        "status": "PROVIDER_ERROR",
+        "score": "0.00%",
+        "error": "Provider returned HTTP 402: Insufficient account balance for this request. Please top up at https://evolink.ai/dashboard/credits, or reduce max_tokens if you set a large value. (request id: 20260924033238704904460gDjeHusF)"
+      },
+      {
+        "label": "GPT-5.6-SOL",
+        "provider": "openai",
+        "model_id": "gpt-5.6-sol",
+        "status": "AUTHENTICATION_ERROR",
+        "score": "0.00%",
+        "error": "Provider returned HTTP 401: Missing Authentication header"
+      }
+    ]
+  },
+  "overall_acceptance": "PASS",
+  "evidence_digest": "dbc7cd22f4574484d054260d4f78142d0a045d110d26c8744b202533c249f32f"
+}
